@@ -8,11 +8,11 @@ provider "azurerm" {
 }
 
 terraform {
-  cloud {
+  backend "remote" {
+    hostname  = "app.terraform.io"
     organization = "Elysian-Crest"
-
     workspaces {
-      name = "customer-feedback-infra-tfcloud"
+      prefix = "customer-"
     }
   }
 }
@@ -25,6 +25,7 @@ resource "azurerm_resource_group" "base_resource_group" {
     environment = "dev"
   }
 }
+
 module "storage" {
   source              = "./storage"
   app_name            = var.app_name
