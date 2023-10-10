@@ -17,6 +17,18 @@ terraform {
   }
 }
 
-module "resource-group" {
-  source = "./resource-group"
+resource "azurerm_resource_group" "base_resource_group" {
+  name     = "ElysianCrestRG"
+  location = "eastus"
+
+  tags = {
+    environment = "dev"
+  }
+}
+module "storage" {
+  source              = "./storage"
+  app_name            = var.app_name
+  environment         = var.environment
+  location            = azurerm_resource_group.base_resource_group.location
+  resource_group_name = azurerm_resource_group.base_resource_group.name
 }
