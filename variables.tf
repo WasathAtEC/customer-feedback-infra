@@ -27,6 +27,6 @@ variable "environment" {
 variable "app_name" {
   description = "application name"
   type        = string
-  default     = "ec"
+  default     = "elysianc"
 }
 
