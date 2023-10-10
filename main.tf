@@ -9,7 +9,7 @@ provider "azurerm" {
 
 terraform {
   backend "remote" {
-    hostname  = "app.terraform.io"
+    hostname     = "app.terraform.io"
     organization = "Elysian-Crest"
     workspaces {
       prefix = "customer-"
