@@ -26,6 +26,15 @@ resource "azurerm_resource_group" "base_resource_group" {
   }
 }
 
+module "acr" {
+  source              = "./acr"
+  app_name            = var.app_name
+  environment         = var.environment
+  location            = azurerm_resource_group.base_resource_group.location
+  resource_group_name = azurerm_resource_group.base_resource_group.name
+  depends_on          = [azurerm_resource_group.base_resource_group]
+}
+
 module "storage" {
   source              = "./storage"
   app_name            = var.app_name
@@ -33,3 +42,4 @@ module "storage" {
   location            = azurerm_resource_group.base_resource_group.location
   resource_group_name = azurerm_resource_group.base_resource_group.name
 }
+
